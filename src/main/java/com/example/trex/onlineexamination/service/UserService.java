@@ -4,6 +4,7 @@ import com.example.trex.onlineexamination.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User getUserByID(Long id);
@@ -17,6 +18,8 @@ public interface UserService {
     List<User> getUsers();
 
     boolean isTokenExpired(LocalDateTime tokenCreationDate);
+
+    User changePassword(Long id, String password);
 
 
 }

@@ -34,6 +34,8 @@ public class User {
 
     private String email;
 
+    private String photoUrl;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
@@ -42,7 +44,6 @@ public class User {
     @JoinTable(name = "user_class", joinColumns = @JoinColumn(name = "class_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @JsonIgnore
     private List<Classes> classes;
-
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore

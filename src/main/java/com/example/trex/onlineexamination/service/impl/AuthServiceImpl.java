@@ -33,11 +33,6 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     }
 
     @Override
-    public User signUp(User user) {
-        return null;
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println(username);
         Optional<User> user = authRepo.findByUsername(username);

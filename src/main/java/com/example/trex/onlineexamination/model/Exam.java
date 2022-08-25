@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.xml.transform.Result;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Exam {
     private List<Question> questions;
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "exam")
     private List<Result> results;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,7 +37,6 @@ public class Exam {
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
-
 
 
 }
