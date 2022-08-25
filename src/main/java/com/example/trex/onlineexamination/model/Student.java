@@ -30,5 +30,5 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private List<Result> results;
 
-
+    private boolean status;
 }

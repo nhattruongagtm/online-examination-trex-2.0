@@ -18,7 +18,9 @@ public class Classes{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    private String name;
 
     @ManyToMany(mappedBy = "classes")
     private List<Student> students;
