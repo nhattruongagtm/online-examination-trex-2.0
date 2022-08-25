@@ -2,10 +2,11 @@ package com.example.trex.onlineexamination.service;
 
 import com.example.trex.onlineexamination.model.Classes;
 import com.example.trex.onlineexamination.model.Subject;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SubjectService {
+public interface SubjectService{
     List<Classes> getClassesBySubject(Long id);
 
     Subject createSubject(Subject subject);

@@ -30,8 +30,9 @@ public class Subject {
     @JsonIgnore
     private List<Exam> exams;
 
-    @ManyToMany(mappedBy = "subjects")
-    private List<Semester> semesters;
+    @ManyToOne
+    @JoinColumn(name = "semester")
+    private Semester semester;
 
 
 

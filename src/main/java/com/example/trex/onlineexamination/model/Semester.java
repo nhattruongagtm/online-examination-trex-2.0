@@ -23,8 +23,7 @@ public class Semester {
 
     private Integer year;
 
-    @ManyToMany
-    @JoinTable(name="semester_subject", joinColumns = @JoinColumn(name = "subject_id"), inverseJoinColumns = @JoinColumn(name = "semester_id"))
+    @OneToMany(mappedBy = "semester")
     private List<Subject> subjects;
 
 }

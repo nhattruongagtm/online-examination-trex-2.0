@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +36,11 @@ public class User {
     private String email;
 
     private String photoUrl;
+
+    private String token;
+
+    @Column(name = "tokenCreationDate", columnDefinition = "TIMESTAMP")
+    private LocalDateTime tokenCreationDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
