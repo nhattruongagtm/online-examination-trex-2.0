@@ -18,7 +18,7 @@ import java.util.List;
 public class Subject {
 
     @Id
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -34,7 +34,8 @@ public class Subject {
     @JoinColumn(name = "semester")
     private Semester semester;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    private User user;
 
 }

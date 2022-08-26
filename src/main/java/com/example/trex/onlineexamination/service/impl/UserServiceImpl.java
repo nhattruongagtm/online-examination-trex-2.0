@@ -1,6 +1,7 @@
 package com.example.trex.onlineexamination.service.impl;
 
 import com.example.trex.onlineexamination.model.User;
+import com.example.trex.onlineexamination.repository.SubjectRepo;
 import com.example.trex.onlineexamination.repository.UserRepo;
 import com.example.trex.onlineexamination.service.MailService;
 import com.example.trex.onlineexamination.service.UserService;
@@ -25,6 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private SubjectRepo subjectRespository;
 
     @Autowired
     MailService mailService;
@@ -40,6 +43,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User u) {
+        return userRepo.save(u);
+    }
+
+    @Override
+    public User addStudent(User u) {
         return userRepo.save(u);
     }
 
@@ -114,6 +122,29 @@ public class UserServiceImpl implements UserService {
             u.setPassword(passwordEncoder.encode(password));
             return userRepo.save(u);
         }
+        return null;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        Optional<User> user = userRepo.findById(id);
+        return user.get();
+    }
+
+    @Override
+    public List<User> getUserByType() {
+        return userRepo.findByType();
+    }
+
+    @Override
+    public List<User> getAllStundentBySubjectId(Long id) {
+        User u = new User();
+        List<User> user = (List<User>) subjectRespository.findById(id).get().getUser();
+        return user;
+    }
+
+    @Override
+    public List<User> getUserByClassID(long classID) {
         return null;
     }
 

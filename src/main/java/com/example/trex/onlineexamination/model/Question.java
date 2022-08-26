@@ -23,7 +23,7 @@ public class Question {
 
     private String title;
 
-    private Long correct;
+    private String correct;
 
     @OneToMany(mappedBy = "question")
     private List<Answer> answers;

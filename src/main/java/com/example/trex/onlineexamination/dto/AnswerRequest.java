@@ -17,5 +17,5 @@ public class AnswerRequest {
     private Long subjectId;
     private Integer duration;
     private Date examDate;
-    private List<com.example.trex.dto.ChoosedRequest> answers;
+    private List<ChoosedRequest> answers;
 }

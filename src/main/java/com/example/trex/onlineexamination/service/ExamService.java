@@ -12,9 +12,9 @@ public interface ExamService {
 
     void deleteExam(Long id);
 
-    boolean checkTestPermission(Long id, Long examID);
+    boolean checkTestPermission(Long id, Exam examID);
 
-    Exam getExam();
+    Exam getExam(Long id);
 
     List<Exam> getListExam(Long id);
 

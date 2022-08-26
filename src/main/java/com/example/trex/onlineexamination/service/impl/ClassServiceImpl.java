@@ -1,12 +1,15 @@
 package com.example.trex.onlineexamination.service.impl;
 
+import com.example.trex.onlineexamination.dto.StudentMarkDTO;
 import com.example.trex.onlineexamination.model.Classes;
+import com.example.trex.onlineexamination.model.Result;
 import com.example.trex.onlineexamination.model.Student;
 import com.example.trex.onlineexamination.repository.ClassRepo;
 import com.example.trex.onlineexamination.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,5 +85,79 @@ public class ClassServiceImpl implements ClassService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Classes> getStudentId(Long userId) {
+        return null;
+    }
+
+    @Override
+    public boolean checkClassIsPresent(Classes cl) {
+        return false;
+    }
+
+    @Override
+    public Classes addClasses(Classes cl) {
+        return null;
+    }
+
+    @Override
+    public List<Classes> getAllClass() {
+        return null;
+    }
+
+    @Override
+    public List<Classes> getClassBySubjectID(long subjectID) {
+        return null;
+    }
+
+    @Override
+    public Classes addClassesBySubjectId(long subjectId, Classes cl) {
+        return null;
+    }
+
+    @Override
+    public List<StudentMarkDTO> getMakrs(Integer classesId) {
+        List<StudentMarkDTO> result = new ArrayList<>();
+        Optional<Classes> classes = classRepo.findById(classesId);
+        if(classes.isPresent()){
+            //List of users in class
+            List<Student> stu = classes.get().getStudents();
+            for(Student user: stu){
+                StudentMarkDTO markDTO = new StudentMarkDTO();
+                markDTO.setId(user.getId());
+                markDTO.setFullname(user.getUser().getFullName());
+                //list of exam histories of student
+                List<Result> results = user.getResults();
+                List<Classes> cls = user.getClasses();
+                if(results.size()!=0){
+                    for(Result re: results) {
+                        for (Classes classes1 : cls) {
+                            if (user.getId() == re.getStudent().getId() && re.getExam().getSubject().getId() == classes1.getSubject().getId()) {
+                                markDTO.setCorrect(re.correct());
+                                markDTO.setTotal(re.total());
+                                markDTO.setCreatedDate(re.getCreatedDateString());
+                                markDTO.setMark(re.mark());
+                            }
+                            result.add(markDTO);
+                        }
+                    }
+                }
+                else result.add(markDTO);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public String deleteClass(long id) {
+        boolean isExist = classRepo.existsById(id);
+        if(isExist){
+            classRepo.deleteById(id);
+            return "Xóa lớp thành công";
+        }else{
+            return "Lớp không tồn tại";
+        }
     }
 }

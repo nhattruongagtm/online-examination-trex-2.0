@@ -1,6 +1,9 @@
 package com.example.trex.onlineexamination.service;
 
+import com.example.trex.onlineexamination.dto.StudentMarkDTO;
 import com.example.trex.onlineexamination.model.Classes;
+
+import java.util.List;
 
 public interface ClassService {
 
@@ -15,5 +18,13 @@ public interface ClassService {
     boolean deleteStudent(Long studentID, Long classID);
 
     boolean blockStudent(Long studentID, Long classID);
+    List<Classes> getStudentId(Long userId);
+    boolean checkClassIsPresent(Classes cl);
+    Classes addClasses(Classes cl);
+    List<Classes> getAllClass();
+    List<Classes> getClassBySubjectID(long subjectID);
+    Classes addClassesBySubjectId(long subjectId, Classes cl);
+    List<StudentMarkDTO> getMakrs(Integer classesId);
+    String deleteClass(long id);
 
 }

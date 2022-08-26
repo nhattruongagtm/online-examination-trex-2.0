@@ -10,6 +10,7 @@ public interface UserService {
     User getUserByID(Long id);
 
     User save(User u);
+    User addStudent(User u);
 
     String forgotPassword(String email);
 
@@ -20,6 +21,9 @@ public interface UserService {
     boolean isTokenExpired(LocalDateTime tokenCreationDate);
 
     User changePassword(Long id, String password);
-
+    User getUserById(Long id);
+    List<User> getUserByType();
+    List<User> getAllStundentBySubjectId(Long id);
+    List<User> getUserByClassID(long classID);
 
 }

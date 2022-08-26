@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,16 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 
     @Override
     public User login(String username, String password) {
+        return null;
+    }
+
+    @Override
+    public User signUp(User user) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAll() {
         return null;
     }
 

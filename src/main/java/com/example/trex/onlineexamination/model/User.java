@@ -39,6 +39,8 @@ public class User {
 
     private String token;
 
+    private Integer type;
+
     @Column(name = "tokenCreationDate", columnDefinition = "TIMESTAMP")
     private LocalDateTime tokenCreationDate;
 

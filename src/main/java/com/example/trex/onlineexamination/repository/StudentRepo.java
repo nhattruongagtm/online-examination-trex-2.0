@@ -1,4 +1,7 @@
 package com.example.trex.onlineexamination.repository;
 
-public interface StudentRepo {
+import com.example.trex.onlineexamination.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepo extends JpaRepository<Student, Long> {
 }
