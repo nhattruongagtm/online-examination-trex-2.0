@@ -88,4 +88,26 @@ public class ClassesController {
                 )
         );
     }
+
+    @PostMapping("/addListStuToClass/{id}")
+    public ResponseEntity<?> addListStudentToClass(@PathVariable(value = "id") List<Long> listId,@RequestBody Classes cl){
+        String listNull = "";
+        boolean check = true;
+        for (int i = 0; i < listId.size(); i++) {
+            User u = userService.getUserByID(listId.get(i));
+            if (cl != null){
+                u.setClasses(cl);
+                userService.save(u);
+                listNull+= listId.get(i)+"|";
+                check = false;
+            }
+        }
+        if (check){
+            ResponseEntity.ok("Add list student success");
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Add "+listNull+" Error");
+    }
+
+
 }
