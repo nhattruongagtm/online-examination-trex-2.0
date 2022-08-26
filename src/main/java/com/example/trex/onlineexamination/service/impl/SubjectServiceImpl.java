@@ -5,13 +5,14 @@ import com.example.trex.onlineexamination.model.Classes;
 import com.example.trex.onlineexamination.model.Student;
 import com.example.trex.onlineexamination.model.Subject;
 import com.example.trex.onlineexamination.model.User;
+import com.example.trex.onlineexamination.repository.StudentRepo;
 import com.example.trex.onlineexamination.repository.SubjectRepo;
 import com.example.trex.onlineexamination.repository.UserRepo;
 import com.example.trex.onlineexamination.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +24,8 @@ public class SubjectServiceImpl implements SubjectService {
     private SubjectRepo subjectRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private StudentRepo studentRepo;
     @Override
     public List<Classes> getClassesBySubject(Long id) {
         return null;
@@ -48,11 +51,21 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepo.delete(subject);
     }
 
-//    @Override
-//    public List<Subject> getAllByStudentId(Long studentId) {
-//        List<Subject> listSubject = subjectRepo.findByStudentId(studentId);
-//        return listSubject;
-//    }
+    @Override
+    public List<Subject> getAllByStudentId(Long studentId) {
+        Optional<Student> studentOptional = studentRepo.findById(studentId);
+        List<Subject> listSubject = new ArrayList<>();
+        if(studentOptional.isPresent()){
+            System.out.println(studentId);
+            Student student = studentOptional.get();
+            List<Classes> classes = student.getClasses();
+            for(Classes clss:classes){
+                listSubject.add(clss.getSubject());
+            }
+        }
+
+        return listSubject;
+    }
 
     @Override
     public Map<String, Object> insertSubject(long studentId, SubjectRequest subjectRequest) {

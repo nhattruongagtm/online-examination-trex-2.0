@@ -29,11 +29,11 @@ public class SubjectController {
      * @param: studentId
      * @return: list of subject as json
      */
-//    @GetMapping("subject/{studentId}")
-//    public ResponseEntity<List<Subject>> getAll(@PathVariable(value = "studentId") Long studentId) {
-//        List<Subject> result = subjectService.getAllByStudentId(studentId);
-//        return ResponseEntity.ok(result);
-//    }
+    @GetMapping("subject/{studentId}")
+    public ResponseEntity<List<Subject>> getAll(@PathVariable(value = "studentId") Long studentId) {
+        List<Subject> result = subjectService.getAllByStudentId(studentId);
+        return ResponseEntity.ok(result);
+    }
     @PostMapping("subject/add-subject/{studentId}")
     public ResponseEntity<ResponseObject> insertSubject(@RequestBody SubjectRequest subjectRequest,
                                                         @PathVariable long studentId){
