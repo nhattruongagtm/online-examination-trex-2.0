@@ -1,9 +1,7 @@
 package com.example.trex.onlineexamination.service.impl;
 
 import com.example.trex.onlineexamination.dto.StudentMarkDTO;
-import com.example.trex.onlineexamination.model.Classes;
-import com.example.trex.onlineexamination.model.Result;
-import com.example.trex.onlineexamination.model.Student;
+import com.example.trex.onlineexamination.model.*;
 import com.example.trex.onlineexamination.repository.ClassRepo;
 import com.example.trex.onlineexamination.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +146,37 @@ public class ClassServiceImpl implements ClassService {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<StudentMarkDTO> getMakrs(long subjectId,long classesId) {
+//        List<StudentMarkDTO> result = new ArrayList<>();
+//        Optional<Classes> classes = classRepo.findById(classesId);
+//        if(classes.isPresent()){
+//            //List of users in class
+//            List<User> users = classes.get().getStudents();
+//            for(User user: users){
+//                StudentMarkDTO markDTO = new StudentMarkDTO();
+//                markDTO.setId(user.getId());
+//                markDTO.setFullname(user.getFullName());
+//                //list of exam histories of student
+//                List<RefAnswer> refAnswers = user.getResults();
+//                if(refAnswers.size()!=0){
+//                    for(RefAnswer answer: refAnswers){
+//                        if(answer.getExam().getSubject().getId()==subjectId){
+//                            markDTO.setCorrect(answer.correct());
+//                            markDTO.setTotal(answer.total());
+//                            markDTO.setCreatedDate(answer.getCreatedDateString());
+//                            markDTO.setMark(answer.mark());
+//                        }
+//                        result.add(markDTO);
+//                    }
+//                }
+//                else result.add(markDTO);
+//            }
+//        }
+//        return result;
+        return null;
     }
 
     @Override

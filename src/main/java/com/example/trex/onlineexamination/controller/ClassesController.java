@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.controller;
 
+import com.example.trex.onlineexamination.dto.StudentMarkDTO;
 import com.example.trex.onlineexamination.model.Classes;
 import com.example.trex.onlineexamination.model.ResponseObject;
 import com.example.trex.onlineexamination.model.User;
@@ -31,12 +32,12 @@ public class ClassesController {
         return ResponseEntity.status(HttpStatus.OK).body(this.classRepo.findById(classesId).get().getStudents().get(0).getClasses().get(0).getSubject().getExams().get(0).getResults().get(0).lastCorrect);
 
     }
-//    @GetMapping("/subjects/{subjectId}/classes/{classesId}/getMarks")
-//    public ResponseEntity getMarks(@PathVariable("subjectId") long subjectId,
-//                                   @PathVariable("classesId")long classesId){
-//        List<StudentMarkDTO> result = classesService.getMakrs(subjectId,classesId);
-//        return ResponseEntity.status(HttpStatus.OK).body(result);
-//    }
+    @GetMapping("/subjects/{subjectId}/classes/{classesId}/getMarks")
+    public ResponseEntity getMarks(@PathVariable("subjectId") long subjectId,
+                                   @PathVariable("classesId")long classesId){
+        List<StudentMarkDTO> result = classesService.getMakrs(subjectId,classesId);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
     @PostMapping("/addStuToClass/{id}")
     public ResponseEntity<?> addStudentToClass(@PathVariable(value = "id") Long id,@RequestBody Classes cl){
         User u = userService.getUserByID(id);

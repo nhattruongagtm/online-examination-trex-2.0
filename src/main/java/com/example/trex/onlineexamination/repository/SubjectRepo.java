@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface SubjectRepo extends CrudRepository<Subject, Long> {
+public interface SubjectRepo extends JpaRepository<Subject, Long> {
 
     List<Subject> findByStudentId(Long studentId);
     List<Subject> findByUserId(Long Id);

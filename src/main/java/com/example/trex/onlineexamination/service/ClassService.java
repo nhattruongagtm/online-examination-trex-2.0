@@ -25,6 +25,8 @@ public interface ClassService {
     List<Classes> getClassBySubjectID(long subjectID);
     Classes addClassesBySubjectId(long subjectId, Classes cl);
     List<StudentMarkDTO> getMakrs(Integer classesId);
+    List<StudentMarkDTO> getMakrs(long subjectId,long classesId);
+
     String deleteClass(long id);
 
 }
