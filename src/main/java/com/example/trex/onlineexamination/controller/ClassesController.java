@@ -97,6 +97,7 @@ public class ClassesController {
             User u = userService.getUserByID(listId.get(i));
             if (cl != null){
 //                u.setClasses(cl);
+                u.setClasses((List<Classes>) cl);
                 userService.save(u);
                 listNull+= listId.get(i)+"|";
                 check = false;
