@@ -34,10 +34,10 @@ public class SubjectController {
         List<Subject> result = subjectService.getAllByStudentId(studentId);
         return ResponseEntity.ok(result);
     }
-    @PostMapping("subject/add-subject/{studentId}")
+    @PostMapping("subject/add-subject/{teacherId}")
     public ResponseEntity<ResponseObject> insertSubject(@RequestBody SubjectRequest subjectRequest,
-                                                        @PathVariable long studentId){
-        Map<String, Object> result = subjectService.insertSubject(studentId,subjectRequest);
+                                                        @PathVariable long teacherId){
+        Map<String, Object> result = subjectService.insertSubject(teacherId,subjectRequest);
         return
                 ResponseEntity.status(HttpStatus.OK).body(
                         new ResponseObject(

@@ -17,7 +17,7 @@ public interface SubjectService{
 
     void deleteSubject(Subject subject);
     List<Subject> getAllByStudentId(Long userId);
-    Map<String,Object> insertSubject(long studentId, SubjectRequest subjectRequest);
+    Map<String,Object> insertSubject(long teacherId, SubjectRequest subjectRequest);
     List<Subject> getListSubjectIdTeacher(Long Id);
 
 }

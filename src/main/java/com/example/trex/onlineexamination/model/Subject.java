@@ -41,4 +41,12 @@ public class Subject {
 
     private String code;
 
+    public Subject(String name) {
+        this.name = name;
+    }
+
+    public Subject(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

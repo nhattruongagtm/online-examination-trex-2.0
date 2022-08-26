@@ -12,10 +12,7 @@ import com.example.trex.onlineexamination.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -68,30 +65,30 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Map<String, Object> insertSubject(long studentId, SubjectRequest subjectRequest) {
-//        Map<String, Object> result= new HashMap<>();
-//        Subject subject = new Subject(subjectRequest);
-//        if (subjectRepo.findByName(
-//                subject.getName()
-//        ).size() > 0
-//        ) {
-//            result.put("msg","Tên môn đã tồn tại");
-//            return result;
-//        }
-//        Optional<User> userOptional = userRepo.findById(935L);
-//        if(!userOptional.isPresent()){
-//            result.put("msg","Giáo viên không tồn tại");
-//            return result;
-//        }
-//        User user = userOptional.get();
-//        Student student = new Student(studentId, "Diem My");
-//        subject.setStudent(student);
-//        subject.setUser(user);
-//        subject = subjectRepo.save(subject);
-//        result.put("msg","Thêm môn thành công");
-//        result.put("subject",subject);
-//        return result;
-        return null;
+    public Map<String, Object> insertSubject(long teacherId, SubjectRequest subjectRequest) {
+        Map<String, Object> result= new HashMap<>();
+        Subject old = subjectRepo.findTopByOrderByIdDesc();
+        Subject subject = new Subject(subjectRequest.getName());
+        subject.setId(old.getId()+1);
+        System.out.println(old.getId());
+        if (subjectRepo.findByName(
+                subject.getName()
+        ).size() > 0
+        ) {
+            result.put("msg","Tên môn đã tồn tại");
+            return result;
+        }
+        Optional<User> userOptional = userRepo.findById(teacherId);
+        if(!userOptional.isPresent()){
+            result.put("msg","Giáo viên không tồn tại");
+            return result;
+        }
+        User user = userOptional.get();
+        subject.setUser(user);
+        subject = subjectRepo.save(subject);
+        result.put("msg","Thêm môn thành công");
+        result.put("subject",subject);
+        return result;
     }
 
     @Override

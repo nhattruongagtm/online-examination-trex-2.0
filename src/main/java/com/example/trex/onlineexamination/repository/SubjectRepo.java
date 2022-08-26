@@ -11,5 +11,5 @@ public interface SubjectRepo extends JpaRepository<Subject, Long> {
     List<Subject> findByUserId(Long Id);
     List<Subject> findByName(String name);
     Subject findSubjectById(Long Id);
-
+    Subject findTopByOrderByIdDesc();
 }
