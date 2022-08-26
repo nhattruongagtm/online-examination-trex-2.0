@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.service;
 
+import com.example.trex.onlineexamination.dto.AuthDTO;
 import com.example.trex.onlineexamination.model.User;
 
 import java.time.LocalDateTime;
@@ -25,5 +26,10 @@ public interface UserService {
     List<User> getUserByType();
     List<User> getAllStundentBySubjectId(Long id);
     List<User> getUserByClassID(long classID);
+
+    User findByUsername(String username);
+    AuthDTO findByEmail(String username);
+
+
 
 }

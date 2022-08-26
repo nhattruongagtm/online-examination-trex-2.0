@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.controller;
 
+import com.example.trex.onlineexamination.dto.AuthDTO;
 import com.example.trex.onlineexamination.model.User;
 import com.example.trex.onlineexamination.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,10 @@ public class UserController {
     public ResponseEntity getAllStudentBySubjectID(@PathVariable(value = "subjectId") Long subjectId){
         List<User> result = userService.getAllStundentBySubjectId(subjectId);
         return ResponseEntity.ok(result);
+    }
+    @GetMapping("/user/{email}")
+    public AuthDTO getUserByUsername(@PathVariable("email") String email){
+        return userService.findByEmail(email);
     }
 
 }

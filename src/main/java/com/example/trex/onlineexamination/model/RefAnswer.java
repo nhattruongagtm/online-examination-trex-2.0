@@ -17,7 +17,6 @@ import java.util.*;
 @Setter
 public class RefAnswer {
 
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -29,7 +28,7 @@ public class RefAnswer {
         @ManyToOne
         @JsonIgnore
         @JoinColumn(name = "student_id")
-        private User student;
+        private Student student;
 
         @Temporal(TemporalType.TIMESTAMP)
         private Date createdDate;
@@ -49,7 +48,7 @@ public class RefAnswer {
                 String[] answers = refAnswers.split("x...x");
 
                 Map<String, String> refs = new HashMap<>();
-                for (Question q : exam.getQuestions()) {
+                for (Question q : exam.getListQuestions()) {
                     refs.put(q.getId().toString(), q.getCorrect());
                 }
 
@@ -70,7 +69,7 @@ public class RefAnswer {
 
         @JsonProperty("total")
         public int total() {
-            return exam.getQuestions().size();
+            return exam.getListQuestions().size();
 
         }
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface SubjectRepo extends JpaRepository<Subject, Long> {
 
-    List<Subject> findByStudentId(Long studentId);
     List<Subject> findByUserId(Long Id);
     List<Subject> findByName(String name);
     Subject findSubjectById(Long Id);

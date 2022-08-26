@@ -16,7 +16,7 @@ public interface SubjectService{
     Subject modifySubject(Subject subject);
 
     void deleteSubject(Subject subject);
-    List<Subject> getAllByStudentId(Long userId);
+//    List<Subject> getAllByStudentId(Long userId);
     Map<String,Object> insertSubject(long studentId, SubjectRequest subjectRequest);
     List<Subject> getListSubjectIdTeacher(Long Id);
 

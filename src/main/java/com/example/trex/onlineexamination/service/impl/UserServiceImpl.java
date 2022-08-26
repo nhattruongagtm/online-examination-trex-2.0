@@ -1,7 +1,13 @@
 package com.example.trex.onlineexamination.service.impl;
 
+import com.example.trex.onlineexamination.dto.AuthDTO;
+import com.example.trex.onlineexamination.model.Role;
+import com.example.trex.onlineexamination.model.Student;
+import com.example.trex.onlineexamination.model.Teacher;
 import com.example.trex.onlineexamination.model.User;
+import com.example.trex.onlineexamination.repository.StudentRepo;
 import com.example.trex.onlineexamination.repository.SubjectRepo;
+import com.example.trex.onlineexamination.repository.TeacherRepo;
 import com.example.trex.onlineexamination.repository.UserRepo;
 import com.example.trex.onlineexamination.service.MailService;
 import com.example.trex.onlineexamination.service.UserService;
@@ -31,6 +37,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    private StudentRepo studentRepo;
+
+    @Autowired
+    private TeacherRepo teacherRepo;
+
 
     @Override
     public User getUserByID(Long id) {
@@ -145,6 +158,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUserByClassID(long classID) {
+        return null;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public AuthDTO findByEmail(String username) {
+        User user = userRepo.findByEmail(username);
+        AuthDTO resp = new AuthDTO();
+        resp.setName(user.getFullName());
+        resp.setPhotoUrl(user.getPhotoUrl());
+
+        for(Role role : user.getRoles()){
+            if(role.getName().equals("ROLE_STUDENT")){
+                Student st = studentRepo.findByUserId(user.getId());
+                resp.setId(st.getId());
+                return resp;
+            }
+            else if(role.getName().equals("ROLE_TEACHER")){
+                Student st = studentRepo.findByUserId(user.getId());
+                resp.setId(st.getId());
+                return resp;
+            }
+        }
         return null;
     }
 

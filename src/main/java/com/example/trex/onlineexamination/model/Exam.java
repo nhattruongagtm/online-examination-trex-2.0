@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -22,21 +23,31 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int duration;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    private Date dateCreated;
+
+    private Time time;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Teacher teacher;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id",referencedColumnName = "id")
+    private Subject subject;
+
     @OneToMany(mappedBy = "exam")
-    private List<Question> questions;
+    private List<Question> listQuestions;
 
     @JsonIgnore
     @OneToMany(mappedBy = "exam")
-    private List<Result> results;
+    private List<RefAnswer> refExams;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date examDate;
-
-    private Integer duration;
-
-    @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
 
 
 }

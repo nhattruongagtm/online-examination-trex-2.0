@@ -29,7 +29,7 @@ public class ClassesController {
 //        return ResponseEntity.status(HttpStatus.OK).body(result);
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(this.classRepo.findById(classesId).get().getStudents().get(0).getClasses().get(0).getSubject().getExams().get(0).getResults().get(0).lastCorrect);
+        return ResponseEntity.status(HttpStatus.OK).body(this.classRepo.findById(classesId).get().getStudents().get(0).getClasses().get(0).getSubject().getExams().get(0).getRefExams().get(0).lastCorrect);
 
     }
     @GetMapping("/subjects/{subjectId}/classes/{classesId}/getMarks")
@@ -96,7 +96,7 @@ public class ClassesController {
         for (int i = 0; i < listId.size(); i++) {
             User u = userService.getUserByID(listId.get(i));
             if (cl != null){
-                u.setClasses(cl);
+//                u.setClasses(cl);
                 userService.save(u);
                 listNull+= listId.get(i)+"|";
                 check = false;

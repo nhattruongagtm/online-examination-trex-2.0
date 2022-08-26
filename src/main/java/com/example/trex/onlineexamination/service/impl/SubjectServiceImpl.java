@@ -48,11 +48,11 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepo.delete(subject);
     }
 
-    @Override
-    public List<Subject> getAllByStudentId(Long studentId) {
-        List<Subject> listSubject = subjectRepo.findByStudentId(studentId);
-        return listSubject;
-    }
+//    @Override
+//    public List<Subject> getAllByStudentId(Long studentId) {
+//        List<Subject> listSubject = subjectRepo.findByStudentId(studentId);
+//        return listSubject;
+//    }
 
     @Override
     public Map<String, Object> insertSubject(long studentId, SubjectRequest subjectRequest) {

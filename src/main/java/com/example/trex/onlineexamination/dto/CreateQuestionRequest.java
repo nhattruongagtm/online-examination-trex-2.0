@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.dto;
 
+import com.example.trex.onlineexamination.model.Answer;
 import com.example.trex.onlineexamination.model.Exam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

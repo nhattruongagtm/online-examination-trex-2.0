@@ -32,10 +32,13 @@ public class Subject {
 
     @ManyToOne
     @JoinColumn(name = "semester")
+    @JsonIgnore
     private Semester semester;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private User user;
+
+    private String code;
 
 }

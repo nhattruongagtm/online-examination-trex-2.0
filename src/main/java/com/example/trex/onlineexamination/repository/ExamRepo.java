@@ -9,7 +9,9 @@ import java.util.List;
 public interface ExamRepo extends JpaRepository<Exam, Long> {
     List<Exam> findExamByIdAndDate(Long id, Date date);
     Exam findExamById(Long id);
-    List<Exam> findByUserId(Long id);
     Exam findBySubjectId(Long id);
-    List<Exam> findExamByDateAndSubjectId(String date,Long code);
+    List<Exam> findByTeacherId(Long id);
+
+
+//    List<Exam> findExamByDateAndSubjectId(String date,Integer code);
 }

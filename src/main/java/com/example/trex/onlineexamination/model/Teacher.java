@@ -30,7 +30,7 @@ public class Teacher {
     private User user;
 
 
-
-
+    @OneToMany(mappedBy = "teacher")
+    private List<Exam> exams;
 
 }

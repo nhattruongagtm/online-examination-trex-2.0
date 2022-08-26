@@ -127,10 +127,10 @@ public class ClassServiceImpl implements ClassService {
                 markDTO.setId(user.getId());
                 markDTO.setFullname(user.getUser().getFullName());
                 //list of exam histories of student
-                List<Result> results = user.getResults();
+                List<RefAnswer> results = user.getResults();
                 List<Classes> cls = user.getClasses();
                 if(results.size()!=0){
-                    for(Result re: results) {
+                    for(RefAnswer re: results) {
                         for (Classes classes1 : cls) {
                             if (user.getId() == re.getStudent().getId() && re.getExam().getSubject().getId() == classes1.getSubject().getId()) {
                                 markDTO.setCorrect(re.correct());

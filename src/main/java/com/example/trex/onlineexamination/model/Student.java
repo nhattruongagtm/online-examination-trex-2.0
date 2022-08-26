@@ -28,7 +28,7 @@ public class Student {
     private List<Classes> classes;
 
     @OneToMany(mappedBy = "student")
-    private List<Result> results;
+    private List<RefAnswer> results;
 
     private boolean status;
 }
