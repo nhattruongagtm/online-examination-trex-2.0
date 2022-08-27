@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -95,13 +96,13 @@ public class ClassesController {
         String listNull = "";
         boolean check = true;
         for (int i = 0; i < listStudent.getListIdStudent().size(); i++) {
-            User u = userService.getUserByID(getListIdStudent().get(i));
-            Classes cl = classesService.findById(listStudent.getAdClass());
-            if (cl != null){
+            User u = userService.getUserByID(listStudent.getListIdStudent().get(i));
+            Optional<Classes> cl = classRepo.findById(listStudent.getIdClass());
+            if (cl.isPresent()){
 //                u.setClasses(cl);
-                u.setClasses((List<Classes>) cl);
+                u.setClasses((List<Classes>) cl.get());
                 userService.save(u);
-                listNull+= listId.get(i)+"|";
+                listNull+= listStudent.getListIdStudent().get(i)+"|";
                 check = false;
             }
         }
