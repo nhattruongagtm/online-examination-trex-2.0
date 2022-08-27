@@ -21,7 +21,7 @@ public class RefAnswerController {
 
     @GetMapping("/refAnswer/findById")
     public List<RefAnswer> findByStudentid(@RequestParam Long id){
-        return answerService.findByStudentId();
+        return answerService.findByStudentId(id);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface RefAnswerService {
     RefAnswer saveTest(RefAnswer answer);
 
-    List<RefAnswer> findByStudentId();
+    List<RefAnswer> findByStudentId(Long id);
 //
 //    ResponseEntity<ResponseObject> saveMark(RefAnswer rs);
 //

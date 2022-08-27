@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.controller;
 
+import com.example.trex.onlineexamination.dto.AddListStudent;
 import com.example.trex.onlineexamination.dto.StudentMarkDTO;
 import com.example.trex.onlineexamination.model.Classes;
 import com.example.trex.onlineexamination.model.ResponseObject;
@@ -89,12 +90,13 @@ public class ClassesController {
         );
     }
 
-    @PostMapping("/addListStuToClass/{id}")
-    public ResponseEntity<?> addListStudentToClass(@PathVariable(value = "id") List<Long> listId,@RequestBody Classes cl){
+    @PostMapping("/addListStuToClass")
+    public ResponseEntity<?> addListStudentToClass(@RequestBody AddListStudent listStudent){
         String listNull = "";
         boolean check = true;
-        for (int i = 0; i < listId.size(); i++) {
-            User u = userService.getUserByID(listId.get(i));
+        for (int i = 0; i < listStudent.getListIdStudent().size(); i++) {
+            User u = userService.getUserByID(getListIdStudent().get(i));
+            Classes cl = classesService.findById(listStudent.getAdClass());
             if (cl != null){
 //                u.setClasses(cl);
                 u.setClasses((List<Classes>) cl);
