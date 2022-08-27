@@ -1,5 +1,6 @@
 package com.example.trex.onlineexamination.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Student {
     private List<Classes> classes;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<RefAnswer> results;
 
     private boolean status;

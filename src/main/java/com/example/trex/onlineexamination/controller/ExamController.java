@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class ExamController {
 
-
+    @Autowired
     ExamService examService;
 
     @PostMapping("/checkTest/{studentId}")

@@ -20,9 +20,11 @@ public class Classes{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(mappedBy = "classes")
+    @JsonIgnore
     private List<Student> students;
 
     @ManyToOne

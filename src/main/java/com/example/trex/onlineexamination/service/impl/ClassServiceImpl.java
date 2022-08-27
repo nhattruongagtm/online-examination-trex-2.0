@@ -3,6 +3,7 @@ package com.example.trex.onlineexamination.service.impl;
 import com.example.trex.onlineexamination.dto.StudentMarkDTO;
 import com.example.trex.onlineexamination.model.*;
 import com.example.trex.onlineexamination.repository.ClassRepo;
+import com.example.trex.onlineexamination.repository.SubjectRepo;
 import com.example.trex.onlineexamination.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class ClassServiceImpl implements ClassService {
     @Autowired
     private ClassRepo classRepo;
+
+    @Autowired
+    private SubjectRepo subjectRepo;
 
     @Override
     public Classes createClass(Classes classes) {
@@ -90,35 +94,69 @@ public class ClassServiceImpl implements ClassService {
         return null;
     }
 
+
     @Override
     public boolean checkClassIsPresent(Classes cl) {
-        return false;
+        List<Classes> cls = classRepo.findAll();
+        try {
+            for (int i = 0; i < cls.size(); i++) {
+                if (cls.get(i).getId() == cl.getId()) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 
     @Override
     public Classes addClasses(Classes cl) {
-        return null;
+        return classRepo.save(cl);
     }
 
     @Override
     public List<Classes> getAllClass() {
-        return null;
+        return classRepo.findAll();
     }
 
     @Override
     public List<Classes> getClassBySubjectID(long subjectID) {
-        return null;
+
+//        List<Classes> cl = subjectRespository.findById(subjectID).get().getClasses();
+
+
+        return classRepo.findAllBySubjectId(subjectID);
+
+//        return cl;
     }
 
     @Override
     public Classes addClassesBySubjectId(long subjectId, Classes cl) {
-        return null;
+        Classes createdClasses = subjectRepo.findById(subjectId).map(
+                subject -> {
+                    cl.setSubject(subject);
+                    return classRepo.save(cl);
+                }
+        ).orElseThrow(() -> new RuntimeException("Not found Subject with id = " + subjectId));
+        return createdClasses;
+    }
+
+    @Override
+    public String deleteClass(long id) {
+        boolean isExist = classRepo.existsById(id);
+        if(isExist){
+            classRepo.deleteById(id);
+            return "Xóa lớp thành công";
+        }else{
+            return "Lớp không tồn tại";
+        }
     }
 
     @Override
     public List<StudentMarkDTO> getMakrs(Integer classesId) {
         List<StudentMarkDTO> result = new ArrayList<>();
-        Optional<Classes> classes = classRepo.findById(classesId);
+        Optional<Classes> classes = classRepo.findById(Long.parseLong(classesId+""));
         if(classes.isPresent()){
             //List of users in class
             List<Student> stu = classes.get().getStudents();
@@ -176,16 +214,5 @@ public class ClassServiceImpl implements ClassService {
             }
         }
         return result;
-    }
-
-    @Override
-    public String deleteClass(long id) {
-        boolean isExist = classRepo.existsById(id);
-        if(isExist){
-            classRepo.deleteById(id);
-            return "Xóa lớp thành công";
-        }else{
-            return "Lớp không tồn tại";
-        }
     }
 }

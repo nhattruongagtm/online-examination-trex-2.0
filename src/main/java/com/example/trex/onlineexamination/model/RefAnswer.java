@@ -26,7 +26,6 @@ public class RefAnswer {
         private Exam exam;
 
         @ManyToOne
-        @JsonIgnore
         @JoinColumn(name = "student_id")
         private Student student;
 

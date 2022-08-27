@@ -38,8 +38,8 @@ public class QuestionController {
     }
 
     @DeleteMapping("question/{id}")
-    public void deleteQuestion(@PathVariable("id") Long id){
-        questionService.deleteQuestion(id);
+    public boolean deleteQuestion(@PathVariable("id") Long id){
+        return questionService.deleteQuestion(id);
     }
 
     @PutMapping("answer/{id}")

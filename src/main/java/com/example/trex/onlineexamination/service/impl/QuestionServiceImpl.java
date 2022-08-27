@@ -198,12 +198,13 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional
-    public void deleteQuestion(Long id) {
+    public boolean deleteQuestion(Long id) {
         Question question = questionRepository.findById(id).orElse(new Question());
         for (Answer ans : question.getAnswers()) {
             answerRepository.deleteById(ans.getId());
         }
         questionRepository.deleteById(id);
+        return true;
     }
 
     @Override

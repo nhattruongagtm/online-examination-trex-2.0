@@ -29,7 +29,7 @@ public class ClassesController {
 //        return ResponseEntity.status(HttpStatus.OK).body(result);
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(this.classRepo.findById(classesId).get().getStudents().get(0).getClasses().get(0).getSubject().getExams().get(0).getRefExams().get(0).lastCorrect);
+        return ResponseEntity.status(HttpStatus.OK).body(this.classRepo.findById(Long.parseLong(classesId+"")).get().getStudents().get(0).getClasses().get(0).getSubject().getExams().get(0).getRefExams().get(0).lastCorrect);
 
     }
     @GetMapping("/subjects/{subjectId}/classes/{classesId}/getMarks")
