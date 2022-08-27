@@ -39,6 +39,11 @@ public class RefAnswerServiceImpl implements RefAnswerService {
         return res;
     }
 
+    @Override
+    public List<RefAnswer> findByStudentId(Long id) {
+        return answerRepository.findAllByStudentId(id);
+    }
+
 
 //    @Override
 //    public ResponseEntity<ResponseObject> saveMark(RefAnswer rs) {
